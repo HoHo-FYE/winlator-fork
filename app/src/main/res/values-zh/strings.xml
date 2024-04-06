@@ -21,7 +21,7 @@
     <string name="box86_box64">Box86/Box64</string>
     <string name="box86_preset">Box86预设</string>
     <string name="box86_version">box86版本</string>
-    <string name="bring_to_front">最前端显示</string>
+    <string name="bring_to_front">置于顶层</string>
     <string name="drive_c">C盘</string>
     <string name="cache">缓存</string>
     <string name="cancel">取消</string>
@@ -58,7 +58,7 @@
     <string name="touchpad_help_main_menu_description">四根手指点击</string>
     <string name="duplicate">复制</string>
     <string name="duplicating_container">正在复制容器...</string>
-    <string name="dxwrapper">DX和d3d默认值</string>
+    <string name="dxwrapper">DX和D3D默认值</string>
     <string name="edit">编辑</string>
     <string name="edit_container">编辑容器</string>
     <string name="enable">启用</string>
@@ -93,7 +93,7 @@
     <string name="magnifier">放大镜</string>
     <string name="max_device_memory">最大设备内存</string>
     <string name="memory">内存</string>
-    <string name="mouse_warp_override">Mouse Warp Override</string>
+    <string name="mouse_warp_override">鼠标经向覆盖</string>
     <string name="name">名称</string>
     <string name="new_container">创建新容器</string>
     <string name="new_environment_variable">新建环境变量</string>
@@ -130,12 +130,6 @@
     <string name="scale">大小</string>
     <string name="screen_size">屏幕分辨率</string>
     <string name="select_profile">选择配置</string>
-    <string name="direct3d">Direct3D</string>
-    <string name="directsound">DirectSound</string>
-    <string name="directmusic">DirectMusic</string>
-    <string name="directplay">DirectPlay</string>
-    <string name="directshow">DirectShow</string>
-    <string name="vcrun2010">Visual C++ 2010</string>
     <string name="settings">设置</string>
     <string name="shape">形状</string>
     <string name="shortcuts">快捷方式</string>
@@ -145,7 +139,7 @@
     <string name="starting_up">启动中...</string>
     <string name="stop_services_on_startup">启动时停止服务</string>
     <string name="storage_info">存储信息</string>
-    <string name="strict_shader_math">Strict Shader Math</string>
+    <string name="strict_shader_math">高精度着色器</string>
     <string name="system">系统</string>
     <string name="target_path">目标路径</string>
     <string name="task_manager">任务管理器</string>

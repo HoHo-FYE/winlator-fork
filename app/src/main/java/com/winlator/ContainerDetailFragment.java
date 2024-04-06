@@ -396,7 +396,7 @@ public class ContainerDetailFragment extends Fragment {
     private String getScreenSize(View view) {
         Spinner sScreenSize = view.findViewById(R.id.SScreenSize);
         String value = sScreenSize.getSelectedItem().toString();
-        if (value.equalsIgnoreCase("custom")) {
+        if (value.equalsIgnoreCase("自定义")) {
             value = Container.DEFAULT_SCREEN_SIZE;
             String strWidth = ((EditText)view.findViewById(R.id.ETScreenWidth)).getText().toString().trim();
             String strHeight = ((EditText)view.findViewById(R.id.ETScreenHeight)).getText().toString().trim();
@@ -432,7 +432,7 @@ public class ContainerDetailFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String value = sScreenSize.getItemAtPosition(position).toString();
-                llCustomScreenSize.setVisibility(value.equalsIgnoreCase("custom") ? View.VISIBLE : View.GONE);
+                llCustomScreenSize.setVisibility(value.equalsIgnoreCase("自定义") ? View.VISIBLE : View.GONE);
             }
 
             @Override
@@ -441,7 +441,7 @@ public class ContainerDetailFragment extends Fragment {
 
         boolean found = AppUtils.setSpinnerSelectionFromIdentifier(sScreenSize, selectedValue);
         if (!found) {
-            AppUtils.setSpinnerSelectionFromValue(sScreenSize, "custom");
+            AppUtils.setSpinnerSelectionFromValue(sScreenSize, "自定义");
             String[] screenSize = selectedValue.split("x");
             ((EditText)view.findViewById(R.id.ETScreenWidth)).setText(screenSize[0]);
             ((EditText)view.findViewById(R.id.ETScreenHeight)).setText(screenSize[1]);

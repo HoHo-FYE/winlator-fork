@@ -18,7 +18,7 @@ import java.io.File;
 import java.util.Iterator;
 
 public class Container {
-    public static final String DEFAULT_ENV_VARS = "ZINK_DESCRIPTORS=lazy ZINK_CONTEXT_THREADED=true ZINK_DEBUG=compact MESA_SHADER_CACHE_DISABLE=false MESA_SHADER_CACHE_MAX_SIZE=512MB mesa_glthread=true WINEESYNC=1";
+    public static final String DEFAULT_ENV_VARS = "LC_ALL=zh_CN.utf8 ZINK_DESCRIPTORS=lazy ZINK_CONTEXT_THREADED=true ZINK_DEBUG=compact MESA_SHADER_CACHE_DISABLE=false MESA_SHADER_CACHE_MAX_SIZE=512MB mesa_glthread=true WINEESYNC=1";
     public static final String DEFAULT_SCREEN_SIZE = "800x600";
     public static final String DEFAULT_GRAPHICS_DRIVER = "turnip";
     public static final String DEFAULT_AUDIO_DRIVER = "alsa";

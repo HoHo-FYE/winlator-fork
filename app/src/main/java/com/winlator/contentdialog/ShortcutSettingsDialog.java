@@ -154,7 +154,7 @@ public class ShortcutSettingsDialog extends ContentDialog {
         Spinner sScreenSize = findViewById(R.id.SScreenSize);
         if (sScreenSize.getSelectedItemPosition() == 0) return null;
         String value = sScreenSize.getSelectedItem().toString();
-        if (value.equalsIgnoreCase("custom")) {
+        if (value.equalsIgnoreCase("自定义")) {
             value = Container.DEFAULT_SCREEN_SIZE;
             String strWidth = ((EditText)findViewById(R.id.ETScreenWidth)).getText().toString().trim();
             String strHeight = ((EditText)findViewById(R.id.ETScreenHeight)).getText().toString().trim();

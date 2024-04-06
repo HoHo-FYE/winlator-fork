@@ -1,29 +1,29 @@
 [
     {
-        "name" : "Programs",
+        "name" : "程序",
         "children" : [
             {
                 "name" : "7-Zip",
                 "path" : "Z:/opt/apps/7-Zip/7zFM.exe"
             },
             {
-                "name" : "Internet Explorer",
+                "name" : "IE浏览器",
                 "path" : "C:/windows/system32/iexplore.exe"
             },
             {
-                "name" : "Notepad",
+                "name" : "记事本",
                 "path" : "C:/windows/notepad.exe"
             },
             {
-                "name" : "Wordpad",
+                "name" : "写字板",
                 "path" : "C:/windows/system32/write.exe",
                 "iconLocation" : "Z:/opt/wine/lib/wine/i386-windows/wordpad.exe"
             },
             {
-                "name" : "Games",
+                "name" : "游戏",
                 "children" : [
                     {
-                        "name" : "WineMine",
+                        "name" : "扫雷",
                         "path" : "C:/windows/system32/winemine.exe"
                     }
                 ]
@@ -31,33 +31,33 @@
         ]
     },
     {
-        "name" : "System Tools",
+        "name" : "系统工具",
         "children" : [
             {
-                "name" : "Computer",
+                "name" : "我的电脑",
                 "path" : "C:/windows/wfm.exe"
             },
             {
-                "name" : "Task Manager",
+                "name" : "任务管理器",
                 "path" : "C:/windows/system32/taskmgr.exe"
             },
             {
-                "name" : "Registry Editor",
+                "name" : "注册表编辑器",
                 "path" : "C:/windows/regedit.exe"
             },
             {
-                "name" : "Command Prompt",
+                "name" : "命令提示符",
                 "path" : "C:/windows/system32/cmd.exe"
             },
             {
-                "name" : "Wine Mono Installer",
+                "name" : "Wine Mono 安装程序",
                 "path" : "C:/windows/system32/wineboot.exe",
                 "cmdArgs" : "-u",
                 "iconLocation" : "shell32.dll",
                 "iconIndex" : -25
             },
             {
-                "name" : "Wine Configuration",
+                "name" : "Wine配置",
                 "path" : "C:/windows/system32/winecfg.exe"
             }
         ]

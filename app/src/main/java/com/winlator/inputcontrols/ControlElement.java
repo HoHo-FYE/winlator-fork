@@ -26,9 +26,7 @@ public class ControlElement {
         BUTTON, D_PAD, RANGE_BUTTON, STICK;
 
         public static String[] names() {
-            Type[] types = values();
-            String[] names = new String[types.length];
-            for (int i = 0; i < types.length; i++) names[i] = types[i].name().replace("_", "-");
+            String[] names = new String[]{"按钮","十字键","范围按钮","摇杆"};
             return names;
         }
     }
@@ -36,9 +34,7 @@ public class ControlElement {
         CIRCLE, RECT, ROUND_RECT, SQUARE;
 
         public static String[] names() {
-            Shape[] shapes = values();
-            String[] names = new String[shapes.length];
-            for (int i = 0; i < shapes.length; i++) names[i] = shapes[i].name().replace("_", " ");
+            String[] names = new String[]{"圆形","长方形","圆角矩形","正方形"};
             return names;
         }
     }
@@ -51,9 +47,7 @@ public class ControlElement {
         }
 
         public static String[] names() {
-            Range[] ranges = values();
-            String[] names = new String[ranges.length];
-            for (int i = 0; i < ranges.length; i++) names[i] = ranges[i].name().replace("_", " ");
+            String[] names = new String[]{"A到Z","0到9","F1到F12","小键盘0到9"};
             return names;
         }
     }
