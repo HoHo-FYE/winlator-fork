@@ -186,8 +186,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             final PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
 
             TextView tvWebpage = dialog.findViewById(R.id.TVWebpage);
-            tvWebpage.setText(Html.fromHtml("<a href=\"https://www.winlator.org\">winlator.org</a>", Html.FROM_HTML_MODE_LEGACY));
+            tvWebpage.setText(Html.fromHtml("官网:<a href=\"https://www.winlator.org\">winlator.org</a>", Html.FROM_HTML_MODE_LEGACY));
             tvWebpage.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+            TextView tvWebfye = dialog.findViewById(R.id.TVWebfye);
+            tvWebfye.setText(Html.fromHtml("B站:<a href=\"https://b23.tv/I4ILeuh\">非鱼厄修改</a>", Html.FROM_HTML_MODE_LEGACY));
+            tvWebfye.setMovementMethod(LinkMovementMethod.getInstance());
+
+
 
             ((TextView)dialog.findViewById(R.id.TVAppVersion)).setText(getString(R.string.version)+" "+pInfo.versionName);
 
