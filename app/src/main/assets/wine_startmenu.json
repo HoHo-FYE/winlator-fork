@@ -61,5 +61,9 @@
                 "path" : "C:/windows/system32/winecfg.exe"
             }
         ]
+    },
+    {
+        "name" : "Ib键盘",
+        "path":"Z:/usr/bin/ib.exe"
     }
 ]
