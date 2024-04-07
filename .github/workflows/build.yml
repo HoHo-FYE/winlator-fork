@@ -1,33 +1,33 @@
-名字: 构建apk
+name: 构建apk
 
-在:
+on:
   workflow_dispatch:
 
-工作:
-建筑:
-名字: “构建 apk”
+jobs:
+  build:
+    name: "构建apk"
     runs-on: ubuntu-latest
-步骤:
-    - 名字: 1 安装依赖
-跑: |
-sudo apt更新&&sudo apt install-y libarchive-tools wget
-    - 名字: 2 克隆仓库
-用途: actions/checkout@v4
-与:
-编号: extra2 #指定结账
-子模块: 递归的
-    - 名字: 3 gradle验证
-用途: gradle/wrapper-validation-action@v2
-      
-    - 名字: 4爪哇配置
-用途: actions/setup-java@v4
-与:
-分布: 'temurin'
-        java-version: '17'
-        
-    - 名字: 5 恢复缓存
-用途: actions/cache@v4
-      with:
+    steps:
+      - name: 1 安装依赖
+        run: |
+          sudo apt update && sudo apt install -y libarchive-tools wget
+      - name: 2 克隆仓库
+        uses: actions/checkout@v4
+        with:
+          ref: extra2 #指定checkout的分支
+          submodules: main
+      - name: 3 gradle验证
+        uses: gradle/wrapper-validation-action@v2
+
+      - name: 4 java配置
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 5 恢复缓存
+        uses: actions/cache@v4
+        with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
@@ -35,22 +35,22 @@ sudo apt更新&&sudo apt install-y libarchive-tools wget
 
           restore-keys: |
             ${{ runner.os }}-gradle-
-    
-    # 先删除旧文件。然后下载完整文件
-    - 名字: 6 下载数据包
-跑: |
-rm -rf app/src/main/assets/imagefs.txz
-wget -P app/src/main/assets \
-        https://github.com/HoHo-FYE/winlator-fork/releases/download/0.0.0.store/imagefs.txz
 
-    - name: 7. 构建
-      run: chmod +x ./gradlew && ./gradlew assembleDebug
-    
-    - name: 8. 上传apk到action
-      uses: actions/upload-artifact@v4
-      with:
-        name: winlator-arm64-v8-debug
-        path: ./app/build/outputs/apk/debug/app-debug.apk
+      # 先删除旧文件。然后下载完整文件
+      - name: 6 下载数据包
+        run: |
+          rm -rf app/src/main/assets/imagefs.txz 
+          wget -P app/src/main/assets \
+          https://github.com/HoHo-FYE/winlator-fork/releases/download/0.0.0.store/imagefs.txz
+
+      - name: 7. 构建
+        run: chmod +x ./gradlew && ./gradlew assembleDebug
+
+      - name: 8. 上传apk到action
+        uses: actions/upload-artifact@v4
+        with:
+          name: winlator-arm64-v8-debug
+          path: ./app/build/outputs/apk/debug/app-debug.apk
     
 
     # - name: Update Nightly Release
