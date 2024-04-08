@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.winlator",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 13,
+      "versionName": "6.1",
+      "outputFile": "Winlator_6.1(原版).apk"
+    }
+  ],
+  "elementType": "File"
+}
