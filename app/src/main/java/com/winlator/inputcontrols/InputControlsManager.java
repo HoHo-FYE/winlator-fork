@@ -64,6 +64,7 @@ public class InputControlsManager {
         profilesLoaded = true;
     }
 
+    //创建输入控件配置
     public ControlsProfile createProfile(String name) {
         ControlsProfile profile = new ControlsProfile(context, ++maxProfileId);
         profile.setName(name);
@@ -72,6 +73,7 @@ public class InputControlsManager {
         return profile;
     }
 
+    // 拷贝输入控件配置
     public ControlsProfile duplicateProfile(ControlsProfile source) {
         String newName;
         for (int i = 1;;i++) {
@@ -103,11 +105,13 @@ public class InputControlsManager {
         return profile;
     }
 
+    //删除输入控件配置
     public void removeProfile(ControlsProfile profile) {
         File file = ControlsProfile.getProfileFile(context, profile.id);
         if (file.isFile() && file.delete()) profiles.remove(profile);
     }
 
+    //导入输入控件配置
     public ControlsProfile importProfile(JSONObject data) {
         try {
             if (!data.has("id") || !data.has("name")) return null;
@@ -137,6 +141,7 @@ public class InputControlsManager {
         }
     }
 
+    //导出输入控件配置
     public File exportProfile(ControlsProfile profile) {
         File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         File destination = new File(downloadsDir, "Winlator/profiles/"+profile.getName()+".icp");

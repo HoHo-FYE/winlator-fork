@@ -22,6 +22,8 @@ public class ControlElement {
     public static final float STICK_DEAD_ZONE = 0.15f;
     public static final float DPAD_DEAD_ZONE = 0.3f;
     public static final float STICK_SENSITIVITY = 3.0f;
+
+    /**控件类型枚举*/
     public enum Type {
         BUTTON, D_PAD, RANGE_BUTTON, STICK;
 
@@ -30,6 +32,8 @@ public class ControlElement {
             return names;
         }
     }
+
+    /**控件形状枚举*/
     public enum Shape {
         CIRCLE, RECT, ROUND_RECT, SQUARE;
 
@@ -38,6 +42,8 @@ public class ControlElement {
             return names;
         }
     }
+
+    /**范围组控枚举*/
     public enum Range {
         FROM_A_TO_Z(26), FROM_0_TO_9(10), FROM_F1_TO_F12(12), FROM_NP0_TO_NP9(10);
         public final byte max;
@@ -51,31 +57,63 @@ public class ControlElement {
             return names;
         }
     }
+
+    /**输入控件视图*/
     private final InputControlsView inputControlsView;
+
+    /**类型*/
     private Type type = Type.BUTTON;
+
+    /**形状*/
     private Shape shape = Shape.CIRCLE;
+
+    /**摇杆默认绑定*/
     private Binding[] bindings = {Binding.NONE, Binding.NONE, Binding.NONE, Binding.NONE};
+
+    /**默认缩放*/
     private float scale = 1.0f;
+
+    /**控件x位置*/
     private short x;
+
+    /**控件y位置*/
     private short y;
+
+    /**选中*/
     private boolean selected = false;
+
+    /**长按模式*/
     private boolean toggleSwitch = false;
+
+    /**单前输入控件ID*/
     private int currentPointerId = -1;
+
+
     private final Rect boundingBox = new Rect();
     private boolean[] states = new boolean[4];
+
+
     private boolean boundingBoxNeedsUpdate = true;
+
+    /**组件自定义文本*/
     private String text = "";
+
+    /**组件图标ID*/
     private byte iconId;
     private Range range;
     private byte currentPage;
     private byte orientation;
+
+    /**当前组件索引*/
     private int currentElementIndex;
     private PointF thumbstickPosition;
 
+    //构造函数传入控件视图
     public ControlElement(InputControlsView inputControlsView) {
         this.inputControlsView = inputControlsView;
     }
 
+    /**摇杆十字键绑定 赋值*/
     private void reset() {
         Arrays.fill(bindings, Binding.NONE);
         if (type == Type.D_PAD || type == Type.STICK) {
