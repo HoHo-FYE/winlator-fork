@@ -41,7 +41,13 @@ public class InputControlsView extends View {
     private boolean editMode = false;
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Path path = new Path();
-    private final ColorFilter colorFilter = new PorterDuffColorFilter(0xffffffff, PorterDuff.Mode.SRC_IN);
+
+
+    //private final ColorFilter colorFilter = new PorterDuffColorFilter(0xffffffff, PorterDuff.Mode.SRC_IN);
+    //尝试更换图标颜色
+    private final ColorFilter colorFilter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+
     private final Point cursor = new Point();
     private boolean readyToDraw = false;
     private boolean moveCursor = false;
@@ -58,6 +64,7 @@ public class InputControlsView extends View {
     private final PointF mouseMoveOffset = new PointF();
     private boolean showTouchscreenControls = true;
 
+    /**启动输入控制器后的视图设置*/
     public InputControlsView(Context context) {
         super(context);
         setClickable(true);
@@ -105,6 +112,8 @@ public class InputControlsView extends View {
         super.onDraw(canvas);
     }
 
+
+    /**绘制辅助对齐网格*/
     private void drawGrid(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(snappingSize * 0.0625f);
@@ -134,6 +143,7 @@ public class InputControlsView extends View {
         paint.setAntiAlias(true);
     }
 
+    /**当前控件创建位置绘制*/
     private void drawCursor(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(snappingSize * 0.0625f);
@@ -477,6 +487,8 @@ public class InputControlsView extends View {
         }
     }
 
+
+    /**获取内置图标资源*/
     public Bitmap getIcon(byte id) {
         if (icons[id] == null) {
             Context context = getContext();
