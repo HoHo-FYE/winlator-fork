@@ -50,11 +50,10 @@ public class XserverNavMenuControl {
     @SuppressLint("SourceLockedOrientationActivity")
     public static void addItems(XServerDisplayActivity a) {
         try {
-            aInstance = a;
-            QH.refreshIsTest(a);
-            Log.d(TAG, "addItems: id为啥获取不到navigationview" + QH.id.NavigationView);
-            NavigationView navigationView = a.findViewById(QH.id.NavigationView);
-            DrawerLayout drawerLayout = a.findViewById(QH.id.DrawerLayout);
+//            QH.refreshIsTest(a);
+            Log.d(TAG, "addItems: id为啥获取不到navigationview" + R.id.NavigationView);
+            NavigationView navigationView = a.findViewById(R.id.NavigationView);
+            DrawerLayout drawerLayout = a.findViewById(R.id.DrawerLayout);
             PulseAudio pulseAudio = new PulseAudio(a);
 
             SubMenu subMenu = navigationView.getMenu().addSubMenu(10, 132, 2, QH.string.额外功能);
@@ -318,9 +317,9 @@ public class XserverNavMenuControl {
     }
 
     public static void addInputControlsItems(XServerDisplayActivity a, ContentDialog dialog) {
-        QH.refreshIsTest(a);
+//        QH.refreshIsTest(a);
         try {
-            LinearLayout linearRoot = (LinearLayout) dialog.findViewById(QH.id.CBLockCursor).getParent();
+            LinearLayout linearRoot = (LinearLayout) dialog.findViewById(R.id.CBLockCursor).getParent();
 
             CheckBox checkGameStyleCursor = new CheckBox(a);
             checkGameStyleCursor.setText(QH.string.游戏样式光标选项);
