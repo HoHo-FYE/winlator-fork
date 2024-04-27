@@ -5,10 +5,15 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
 
 import android.annotation.SuppressLint;
 
+import androidx.appcompat.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
@@ -31,6 +36,8 @@ import com.winlator.xserver.CursorManager;
 import com.winlator.xserver.Drawable;
 import com.winlator.xserver.requests.DrawRequests;
 
+import java.nio.ByteBuffer;
+import java.util.Locale;
 
 public class XserverNavMenuControl {
     private static final String TAG = "XserverNavMenuControl";
@@ -86,10 +93,85 @@ public class XserverNavMenuControl {
     }
 
 
+    static LinearLayout linearBitmapList;
+    public static void addBitmap(ByteBuffer data, int dstX, int dstY, int w, int h, int depth, DrawRequests.Format format){
+        try {
+            boolean depthIs1 = depth == 1;
+            int[] colors = new int[w * h];
+            try {
+                if(depthIs1 && format == DrawRequests.Format.Z_PIXMAP){
+                    byte[] bytes = data.array();
+                    int stride = ((w + 32 - 1) >> 5) << 2;
+                    for(int y=0; y<h; y++){
+                        for(int x=0; x<w; x++){
+                            int mask = (1 << (x & 7));
+                            int bit = (bytes[stride*y + (x>>3)] & mask) != 0 ? 1 : 0;
+                            colors[w*y+x] = bit !=0 ? Color.WHITE : Color.BLACK;
+                        }
+                    }
+                }
+                else
+                    for(int i=0; i<colors.length; i++) {
+                        colors[i] = depthIs1 ?data.get() : data.getInt();
+                    }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            Bitmap bitmap = Bitmap.createBitmap(colors,w, h, Bitmap.Config.ARGB_8888);
+            linearBitmapList.post(()->{
+                ImageView imageView = new ImageView(aInstance);
+                imageView.setImageBitmap(bitmap);
+                linearBitmapList.addView(imageView, 0, new ViewGroup.LayoutParams(80,80));
+                View view = new View(aInstance);
+                view.setBackgroundColor(Color.RED);
+                view.setMinimumHeight(4);
+                linearBitmapList.addView(view, 0);
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        data.rewind();
+    }
+
+    public static void addBitmap(Drawable image) {
+        try {
+            ByteBuffer buffer = image.getData();
+            int[] colors = new int[image.width * image.height];
+            for(int i=0; i<colors.length; i++) {
+                colors[i] = buffer.getInt() | 0xff000000;
+            }
+            buffer.rewind();
+            Bitmap bitmap = Bitmap.createBitmap(colors,image.width, image.height, Bitmap.Config.ARGB_8888);
+            linearBitmapList.post(()->{
+                ImageView imageView = new ImageView(aInstance);
+                imageView.setImageBitmap(bitmap);
+                linearBitmapList.addView(imageView, 0, new ViewGroup.LayoutParams(80,80));
+                View view = new View(aInstance);
+                view.setBackgroundColor(Color.RED);
+                view.setMinimumHeight(4);
+                linearBitmapList.addView(view, 0);
+
+                imageView.setOnClickListener(v->{
+                    FrameLayout frameLayout = new FrameLayout(aInstance);
+                    ImageView bigImage = new ImageView(aInstance);
+                    if(bitmap.getWidth()<50 || bigImage.getHeight() < 50)
+                        bigImage.setLayoutParams(new FrameLayout.LayoutParams(QH.px(aInstance,160),QH.px(aInstance,160)));
+                    bigImage.setImageBitmap(bitmap);
+                    frameLayout.addView(bigImage);
+                    new AlertDialog.Builder(aInstance)
+                            .setView(frameLayout)
+                            .show();
+                });
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     public static boolean getIsGameStyleCursorFromPref(Context a) {
         return QH.getPreference(a).getBoolean(PREF_KEY_IS_GAME_STYLE_CURSOR, false);
     }
-
     public static void setIsGameStyleCursor(Context a, boolean isGame, boolean updatePef) {
         if (updatePef)
             QH.getPreference(a).edit().putBoolean(PREF_KEY_IS_GAME_STYLE_CURSOR, isGame).apply();
