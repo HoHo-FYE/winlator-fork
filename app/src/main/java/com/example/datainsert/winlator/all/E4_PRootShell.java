@@ -119,15 +119,20 @@ public class E4_PRootShell {
 
             runningProcess = builder.start();
             //反射时，类要用实例.getClass()获取，而不能直接传入抽象类Process
-            pid = QH.reflectGetFieldInt(runningProcess.getClass(), runningProcess, "pid", true);
+            pid = UtilsReflect.getPid(runningProcess);
             Log.d(TAG, "exec: 获取到的pid="+pid);
 
             //获取输出流
             outputThread = new OutputThread(runningProcess.getInputStream());
             outputThread.start();
 
-            //启动dash成功后，再输入命令启动box64
-            sendInputToProcess(command.substring(box64CmdIdx) + " &\n");
+            //启动dash成功后，再输入命令启动box64。
+            //注意快捷方式启动时，使用winhandler.exe启动exe，其路径中的空格会替换成\+空格，所以还得先用winlator的函数正确分割参数，然后每个参数都加上引号
+            StringBuilder box64CmdFinal = new StringBuilder();
+            for(String str:ProcessHelper.splitCommand(command.substring(box64CmdIdx)))
+                box64CmdFinal.append(str.startsWith("\"") ? "" : "\"").append(str).append(str.endsWith("\"") ? "" : "\"").append(" ");
+            sendInputToProcess(box64CmdFinal + " &\n");
+//            sendInputToProcess(command.substring(box64CmdIdx) + " &\n");
 
             //ProcessHelper.createWaitForThread。在进程结束时调用callback，并清空成员变量的值
             Executors.newSingleThreadExecutor().execute(() -> {
@@ -281,6 +286,7 @@ public class E4_PRootShell {
     }
 
     private static class OutputThread extends Thread{
+        //TODO 好像跨线程写入的话不安全。要不试试 CopyOnWriteArrayList
         private List<String> allLines = new ArrayList<>(); //存储历史文本行
         private DisplayCallback displayCallback = null; //用于将文本显示到屏幕上的回调。其内容应该在主线程上执行
         private InputStream inputStream; //输出内容流
